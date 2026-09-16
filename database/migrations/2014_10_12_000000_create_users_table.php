@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('direccion');
             $table->string('fijo');
             $table->string('movil');
-            $table->string('rrss');
+            $table->string('rrss')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

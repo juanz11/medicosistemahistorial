@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
+Route::get('/salir', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware('auth:web')->group(function () {
+    Route::get('/', [WebController::class, 'home'])->name('home');
+    Route::get('/lists/verificar-pacientes', [WebController::class, 'verificarPacientes'])->name('pacientes.verificar');
 });
- */

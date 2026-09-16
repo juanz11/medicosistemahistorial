@@ -16,7 +16,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('users')->insert([[
             'admin' => '0',
             'tipo' => '1',
             'nombres' => 'Celen S.',
@@ -114,8 +114,9 @@ class UsersSeeder extends Seeder
             'direccion' => 'Urb. Prebo, Av. Andrés Eloy Blanco, C.P. Prebo, piso 3, consultorio 3-01, Valencia, Edo. Carabobo.',
             'fijo' => '(0241) 824 2649',
             'movil' => '(0000) 000 0000',
+            'rrss' => null,
             'email' => 'mwiedemann@sncpharma.com',
             'password' => Hash::make('mw2023snc'),
-        ]);
+        ]]);
     }
 }
