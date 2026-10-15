@@ -22,4 +22,8 @@ Route::get('/salir', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth:web')->group(function () {
     Route::get('/', [WebController::class, 'home'])->name('home');
     Route::get('/lists/verificar-pacientes', [WebController::class, 'verificarPacientes'])->name('pacientes.verificar');
+    Route::get('/pacientes/nuevo', [WebController::class, 'crearPaciente'])->name('pacientes.crear');
+    Route::post('/pacientes', [WebController::class, 'guardarPaciente'])->name('pacientes.guardar');
+    Route::get('/pacientes/{id}', [WebController::class, 'verPaciente'])->name('pacientes.historial');
+    Route::post('/pacientes/{id}/consultas', [WebController::class, 'guardarConsulta'])->name('consultas.guardar');
 });

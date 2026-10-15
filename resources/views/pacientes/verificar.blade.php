@@ -7,7 +7,7 @@
             <div>
                 <h2 class="text-2xl font-semibold leading-tight">Pacientes</h2>
             </div>
-            <div class="my-2 flex sm:flex-row flex-col">
+            <div class="my-2 flex sm:flex-row flex-col justify-between gap-2">
                 <form method="GET" action="{{ route('pacientes.verificar') }}" class="block relative">
                     <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                         <i class="fa-solid fa-magnifying-glass h-6 w-6 flex items-center justify-center text-gray-500"></i>
@@ -15,6 +15,9 @@
                     <input name="search" value="{{ $search }}" placeholder="Buscar"
                            class="appearance-none rounded-md border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none">
                 </form>
+                <a href="{{ route('pacientes.crear') }}" class="text-sm bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded text-center">
+                    <i class="fa-solid fa-user-plus mr-1"></i> Nuevo Paciente
+                </a>
             </div>
             <div class="sm:-mx-8 px-0 sm:px-8 py-4 overflow-x-auto">
                 <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -35,6 +38,7 @@
                                     <span class="hidden md:block">Médico Tratante</span>
                                     <span class="block md:hidden">Médico</span>
                                 </th>
+                                <th class="px-2 py-2 border-b-2 border-gray-300 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Historial</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,10 +88,15 @@
                                             @if($medico) {{ $prefijo }} {{ $medico->nombres }} @endif
                                         </p>
                                     </td>
+                                    <td class="px-2 py-2 border-b border-gray-200 text-sm">
+                                        <a href="{{ route('pacientes.historial', $paciente->id) }}" class="text-blue-700 hover:text-blue-900 font-semibold whitespace-no-wrap">
+                                            <i class="fa-solid fa-file-medical mr-1"></i> Ver
+                                        </a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="bg-white">
-                                    <td colspan="5" class="px-5 py-5 border-b border-gray-200 text-sm text-center">
+                                    <td colspan="6" class="px-5 py-5 border-b border-gray-200 text-sm text-center">
                                         <p class="text-gray-900">No existen registros.</p>
                                     </td>
                                 </tr>

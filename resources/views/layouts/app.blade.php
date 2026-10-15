@@ -42,6 +42,13 @@
                         </a>
                     </li>
                     <hr>
+                    <li class="min-w-max">
+                        <a href="{{ route('pacientes.crear') }}" class="group flex items-center space-x-4 px-4 py-3 {{ request()->routeIs('pacientes.crear') ? 'bg-gradient-to-r from-blue-600 to-sky-700 texto-activado' : 'text-gray-600' }}">
+                            <i class="fa-solid fa-user-plus h-6 w-6 flex items-center justify-center {{ request()->routeIs('pacientes.crear') ? 'texto-activado' : 'text-gray-700' }} group-hover:text-blue-900"></i>
+                            <span class="group-hover:text-gray-700">Nuevo Paciente</span>
+                        </a>
+                    </li>
+                    <hr>
                 </ul>
             </div>
             <div class="w-max -mb-3">

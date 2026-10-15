@@ -17,6 +17,11 @@
                     <h3 class="mt-3 font-semibold text-gray-800">Verificar Pacientes</h3>
                     <p class="text-sm text-gray-500 mt-1">Consulte el listado de pacientes registrados en el sistema.</p>
                 </a>
+                <a href="{{ route('pacientes.crear') }}" class="bg-white shadow rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <i class="fa-solid fa-user-plus text-3xl text-blue-700"></i>
+                    <h3 class="mt-3 font-semibold text-gray-800">Nuevo Paciente</h3>
+                    <p class="text-sm text-gray-500 mt-1">Registre un nuevo paciente en el sistema.</p>
+                </a>
             </div>
         </div>
     </div>

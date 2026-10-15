@@ -30,6 +30,7 @@ class Consulta extends Model
         'diagnostico',
         'tratamiento',
         'observaciones',
+        'proxima_cita',
     ];
     public function user(){
         return $this->belongsTo(User::class);
