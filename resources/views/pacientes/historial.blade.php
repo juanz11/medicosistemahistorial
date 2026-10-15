@@ -107,6 +107,30 @@
                                     @if($consulta->observaciones)
                                         <p class="text-xs text-gray-500 mt-1"><span class="font-semibold">Observaciones:</span> {{ $consulta->observaciones }}</p>
                                     @endif
+                                    @php
+                                        $detalles = [
+                                            'Motivo' => $consulta->motivo,
+                                            'Enfermedad actual' => $consulta->enfermedad,
+                                            'Antecedentes' => $consulta->antecedentes,
+                                            'Neuro' => $consulta->neuro,
+                                            'Neuro superior' => $consulta->neuro_superior,
+                                            'Neuro pares' => $consulta->neuro_pares,
+                                            'Neuro sistema' => $consulta->neuro_sistema,
+                                            'Neuro sensibilidad' => $consulta->neuro_sensibilidad,
+                                            'Neuro taxia' => $consulta->neuro_taxia,
+                                            'Neuro praxia' => $consulta->neuro_praxia,
+                                            'Lab. básico' => $consulta->laboratorio_basico,
+                                            'Lab. complementario' => $consulta->laboratorio_complementario,
+                                        ];
+                                    @endphp
+                                    <details class="mt-2">
+                                        <summary class="text-xs text-blue-700 cursor-pointer hover:underline">Ver detalles de la consulta</summary>
+                                        <div class="mt-1 text-xs text-gray-600 space-y-1">
+                                            @foreach($detalles as $label => $valor)
+                                                <p><span class="font-semibold">{{ $label }}:</span> {{ ($valor !== null && trim((string)$valor) !== '') ? $valor : '—' }}</p>
+                                            @endforeach
+                                        </div>
+                                    </details>
                                 </td>
                                 <td class="px-5 py-4 border-b border-gray-200 text-sm text-gray-900 whitespace-no-wrap">
                                     {{ $consulta->proxima_cita ? \Carbon\Carbon::parse($consulta->proxima_cita)->format('d/m/Y') : '—' }}
