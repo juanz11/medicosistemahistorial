@@ -6,9 +6,14 @@
         <div class="py-8">
             <div class="flex items-center justify-between">
                 <h2 class="text-2xl font-semibold leading-tight">Historial de Diagnósticos</h2>
-                <a href="{{ route('pacientes.verificar') }}" class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded">
-                    <i class="fa-solid fa-arrow-left mr-1"></i> Volver
-                </a>
+                <div class="flex gap-2">
+                    <a href="{{ route('pacientes.historial.pdf', $paciente->id) }}?ver=1" target="_blank" class="text-sm bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
+                        <i class="fa-solid fa-file-pdf mr-1"></i> Ver PDF completo
+                    </a>
+                    <a href="{{ route('pacientes.verificar') }}" class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Volver
+                    </a>
+                </div>
             </div>
 
             @if(session('success'))
@@ -87,6 +92,7 @@
                             <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Diagnóstico</th>
                             <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Próxima Cita</th>
                             <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Atendido por</th>
+                            <th class="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">PDF</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,10 +144,15 @@
                                 <td class="px-5 py-4 border-b border-gray-200 text-sm text-gray-900 whitespace-no-wrap">
                                     @if($medico) {{ $prefijo }} {{ $medico->nombres }} {{ $medico->apellidos }} @endif
                                 </td>
+                                <td class="px-5 py-4 border-b border-gray-200 text-sm whitespace-no-wrap">
+                                    <a href="{{ route('consultas.pdf', $consulta->id) }}" class="text-red-600 hover:text-red-800" title="Descargar esta consulta en PDF">
+                                        <i class="fa-solid fa-file-pdf text-lg"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr class="bg-white">
-                                <td colspan="4" class="px-5 py-5 border-b border-gray-200 text-sm text-center text-gray-900">
+                                <td colspan="5" class="px-5 py-5 border-b border-gray-200 text-sm text-center text-gray-900">
                                     Este paciente aún no tiene diagnósticos registrados.
                                 </td>
                             </tr>

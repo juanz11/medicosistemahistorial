@@ -25,5 +25,7 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/pacientes/nuevo', [WebController::class, 'crearPaciente'])->name('pacientes.crear');
     Route::post('/pacientes', [WebController::class, 'guardarPaciente'])->name('pacientes.guardar');
     Route::get('/pacientes/{id}', [WebController::class, 'verPaciente'])->name('pacientes.historial');
+    Route::get('/pacientes/{id}/historial-pdf', [WebController::class, 'descargarHistorialPdf'])->name('pacientes.historial.pdf');
     Route::post('/pacientes/{id}/consultas', [WebController::class, 'guardarConsulta'])->name('consultas.guardar');
+    Route::get('/consultas/{id}/pdf', [WebController::class, 'descargarConsultaPdf'])->name('consultas.pdf');
 });
