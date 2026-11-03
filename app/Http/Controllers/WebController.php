@@ -68,7 +68,7 @@ class WebController extends Controller
 
         return redirect()
             ->route('pacientes.historial', $paciente->id)
-            ->with('success', 'Diagnóstico registrado correctamente.');
+            ->with('success', "Diagn\u{00F3}stico registrado correctamente.");
     }
 
     public function descargarHistorialPdf(Request $request, $id)
@@ -81,7 +81,7 @@ class WebController extends Controller
         if ($consultas->isEmpty()) {
             $this->encabezadoPaciente($pdf, $paciente);
             $pdf->SetFont('Helvetica', '', 11);
-            $pdf->MultiCell(0, 7, $this->t('Este paciente aún no tiene diagnósticos registrados.'));
+            $pdf->MultiCell(0, 7, $this->t("Este paciente a\u{00FA}n no tiene diagn\u{00F3}sticos registrados."));
         }
 
         foreach ($consultas as $consulta) {
@@ -134,16 +134,16 @@ class WebController extends Controller
         $this->campo($pdf, 'Neuro sensibilidad', $consulta->neuro_sensibilidad);
         $this->campo($pdf, 'Neuro taxia', $consulta->neuro_taxia);
         $this->campo($pdf, 'Neuro praxia', $consulta->neuro_praxia);
-        $this->campo($pdf, 'Laboratorio básico', $consulta->laboratorio_basico);
+        $this->campo($pdf, "Laboratorio b\u{00E1}sico", $consulta->laboratorio_basico);
         $this->campo($pdf, 'Laboratorio complementario', $consulta->laboratorio_complementario);
 
         $pdf->Ln(2);
-        $this->campo($pdf, 'Diagnóstico', $consulta->diagnostico, true);
+        $this->campo($pdf, "Diagn\u{00F3}stico", $consulta->diagnostico, true);
         $this->campo($pdf, 'Tratamiento', $consulta->tratamiento);
         $this->campo($pdf, 'Observaciones', $consulta->observaciones);
 
         if ($consulta->proxima_cita) {
-            $this->campo($pdf, 'Próxima cita', $this->fecha($consulta->proxima_cita));
+            $this->campo($pdf, "Pr\u{00F3}xima cita", $this->fecha($consulta->proxima_cita));
         }
     }
 
@@ -151,7 +151,7 @@ class WebController extends Controller
     {
         $pdf->AddPage();
         $pdf->SetFont('Helvetica', 'B', 15);
-        $pdf->Cell(0, 8, $this->t('SISMED - Historial de Diagnósticos'), 0, 1);
+        $pdf->Cell(0, 8, $this->t("SISMED - Historial de Diagn\u{00F3}sticos"), 0, 1);
         $pdf->SetFont('Helvetica', '', 10);
         $pdf->Cell(0, 6, $this->t('Paciente: ' . $paciente->nombres . ' ' . $paciente->apellidos . '    C.I.: ' . $paciente->cedula . '    Edad: ' . $paciente->edad), 0, 1);
         $pdf->SetDrawColor(180, 180, 180);
@@ -183,7 +183,14 @@ class WebController extends Controller
 
     private function t($texto)
     {
-        return mb_convert_encoding((string) $texto, 'Windows-1252', 'UTF-8');
+        $s = (string) $texto;
+        if (function_exists('mb_convert_encoding')) {
+            return mb_convert_encoding($s, 'Windows-1252', 'UTF-8');
+        }
+        if (function_exists('iconv')) {
+            return iconv('UTF-8', 'Windows-1252//TRANSLIT', $s);
+        }
+        return utf8_decode($s);
     }
 
     private function descargar(PDFGenerator $pdf, $nombre, $inline = false)
